@@ -2,7 +2,7 @@
 	<body>
 		<p>
 			<h1>State Design Pattern Game</h1>
-			By <a href="mailto:humberto.menezes@gmail.com">Humberto Menezes</a>
+			By <a href="mailto:humberto.menezes@gmail.com">Humberto Menezes</a></br>
 		</p>
 		<p>
 			A simple space shooter game created to demonstrate an implementation of the State design pattern.
