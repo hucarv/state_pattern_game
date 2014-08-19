@@ -40,8 +40,8 @@ public class EnemyMovementScript : MonoBehaviour {
 	
 		// performing the current attack behavior
 		switch(state) {
-		case FOLLOW_ATTACK: { PerformFollowAttack(); break; }
-		case STOP_AND_SHOOT_ATTACK: { PerformStopAndShootAttack(); break; }
+			case FOLLOW_ATTACK: { PerformFollowAttack(); break; }
+			case STOP_AND_SHOOT_ATTACK: { PerformStopAndShootAttack(); break; }
 		}
 		
 		// changing the attack

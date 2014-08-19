@@ -7,9 +7,10 @@ public class LaserScript : MonoBehaviour {
 	private const float SPEED = 8.0f;
 	
 	public int direction = 1;
+	public GameObject laserCollisionPrefab;
 	private float lifeTime;
-
-	void FixedUpdate () {
+	
+	void Update () {
 		transform.Translate(0.0f, direction * SPEED * Time.deltaTime, 0.0f);
 			
 		// destroying the laser
@@ -17,5 +18,12 @@ public class LaserScript : MonoBehaviour {
 		if (lifeTime > 3.0f) {
 			Destroy(gameObject);
 		}
+	}
+	
+	void OnCollisionEnter2D(Collision2D collision) {
+		print ("collision: " + collision.gameObject.tag);
+		GameObject laserCollision = (GameObject) Instantiate(laserCollisionPrefab);
+		laserCollision.transform.position = transform.position;
+		Destroy(gameObject);
 	}
 }
