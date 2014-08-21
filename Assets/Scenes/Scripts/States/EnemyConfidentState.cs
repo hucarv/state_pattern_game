@@ -28,7 +28,7 @@ public class EnemyConfidentState : EnemyState {
 			followAttackTime = 0.0f;
 		}
 
-		// changing the attack pattern if the HP is low
+		// changing the attack pattern if the HP is low (internal state has been changed!)
 		if (enemyMovementScript.GetHP() < 150) {
 			gameObject.SendMessage("SetAutoShootInterval", 0.4f);
 			enemyMovementScript.SetState(new EnemyDesperateState());
