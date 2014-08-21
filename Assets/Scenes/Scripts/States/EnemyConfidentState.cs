@@ -1,23 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyAttackFollowingState : EnemyAttackState {
+public class EnemyConfidentState : EnemyState {
 
 	private GameObject player;
 	private float followAttackSpeed;
 	private float followAttackTime;
-	private GameObject gameObject;
 
-	public EnemyAttackFollowingState(GameObject pGameObject) {
-		gameObject = pGameObject;
+	public EnemyConfidentState() {
 		followAttackSpeed = 0.5f;
 		player = GameObject.Find("Player");
 	}
 
-	public override void Attack() {
+	public override void Update(EnemyMovementScript enemyMovementScript) {
 		if (player == null) {
 			return;
 		}
+		GameObject gameObject = enemyMovementScript.gameObject;
 		
 		// moving
 		Vector3 targetPosition = new Vector3(player.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -27,6 +26,12 @@ public class EnemyAttackFollowingState : EnemyAttackState {
 		followAttackTime += Time.deltaTime;
 		if (followAttackTime > 1.0f) {
 			followAttackTime = 0.0f;
+		}
+
+		// changing the attack pattern if the HP is low
+		if (enemyMovementScript.GetHP() < 150) {
+			gameObject.SendMessage("SetAutoShootInterval", 0.4f);
+			enemyMovementScript.SetState(new EnemyDesperateState());
 		}
 	}
 }

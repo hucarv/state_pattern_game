@@ -3,21 +3,19 @@ using System.Collections;
 
 public class EnemyMovementScript : SpaceShipScript {
 
-	private EnemyAttackState state;
+	private EnemyState state;
 	
 	public override void Start () {
 		base.Start();
 		SetHP(300);
-		state = new EnemyAttackFollowingState(gameObject);
+		SetState(new EnemyConfidentState());
 	}
 	
 	void Update () {
-		state.Attack();
-	
-		// changing the attack pattern if the HP is low
-		if (state is EnemyAttackFollowingState && GetHP() < 150) {
-			SendMessage("SetAutoShootInterval", 0.4f);
-			state = new EnemyAttackRotatingState(gameObject);
-		} 
+		state.Update(this);
+	}
+
+	public void SetState(EnemyState pState) {
+		state = pState;
 	}
 }
