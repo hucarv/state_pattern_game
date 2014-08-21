@@ -14,7 +14,7 @@
 			The State pattern was applied to allow a better behavior management of the alien spaceship.
 		</p>
 		<p>
-			This game was made with <a href="http://unity3d.com">Unity3D</a>.</br></br>
+			This game was made with <a href="http://unity3d.com">Unity3D</a>.</br></br>  
 			Space Shooter graphics by <a href="http://www.kenney.nl">Kenney Vleugels</a>,
 			downloaded from <a href="http://opengameart.org/content/space-shooter-art">OpenGameArt.org</a>.
 		</p>

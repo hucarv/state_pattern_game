@@ -15,7 +15,6 @@ public class EnemyMovementScript : SpaceShipScript {
 	// -- follow attack code ------------------------- //
 	
 	// -- stop and shoot attack code ----------------- //
-	private Quaternion initialRotation;
 	private float rotationSpeed;
 	private float changeAngleTime;
 	private int shootingDirection;
@@ -49,7 +48,6 @@ public class EnemyMovementScript : SpaceShipScript {
 			shootingDirection = -1;
 			changeAngleTime = 0.0f;
 			SendMessage("SetAutoShootInterval", 0.4f);
-			initialRotation = transform.localRotation;
 			state = STOP_AND_SHOOT_ATTACK;
 		} 
 	}
@@ -61,8 +59,8 @@ public class EnemyMovementScript : SpaceShipScript {
 		}
 	
 		// moving
-		Vector3 targetPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
-		transform.position = Vector3.MoveTowards(transform.position, targetPosition, followAttackSpeed * Time.deltaTime);
+		Vector3 targetPosition = new Vector3(player.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+		gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition, followAttackSpeed * Time.deltaTime);
 		
 		// shooting
 		followAttackTime += Time.deltaTime;
@@ -74,7 +72,7 @@ public class EnemyMovementScript : SpaceShipScript {
 	
 	// -- stop and shoot attack code ----------------- //
 	private void PerformStopAndShootAttack() {
-		transform.RotateAround(transform.position, Vector3.forward, shootingDirection * rotationSpeed * Time.deltaTime);
+		gameObject.transform.RotateAround(gameObject.transform.position, Vector3.forward, shootingDirection * rotationSpeed * Time.deltaTime);
 		
 		changeAngleTime += Time.deltaTime;
 		if (changeAngleTime > 1.0f) {
