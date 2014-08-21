@@ -8,7 +8,9 @@ public class LaserScript : MonoBehaviour {
 	
 	public int direction = 1;
 	public GameObject laserCollisionPrefab;
+
 	private float lifeTime;
+	private int damage = 3;
 	
 	void Update () {
 		transform.Translate(0.0f, direction * SPEED * Time.deltaTime, 0.0f);
@@ -21,7 +23,11 @@ public class LaserScript : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D collision) {
-		print ("collision: " + collision.gameObject.tag);
+
+		// damaging the collided object
+		collision.gameObject.SendMessage("OnLaserHit", damage);
+
+		// creating an explosion and destroying this laser object
 		GameObject laserCollision = (GameObject) Instantiate(laserCollisionPrefab);
 		laserCollision.transform.position = transform.position;
 		Destroy(gameObject);

@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyMovementScript : MonoBehaviour {
+public class EnemyMovementScript : SpaceShipScript {
 
 	private const int FOLLOW_ATTACK = 1;
 	private const int STOP_AND_SHOOT_ATTACK = 2;
-	private const int EXPLODING = 3;
 
 	private int state;
-	private float attackTime;
 	
 	// -- follow attack code ------------------------- //
 	private GameObject player;
@@ -23,7 +21,9 @@ public class EnemyMovementScript : MonoBehaviour {
 	private int shootingDirection;
 	// -- stop and shoot attack code ----------------- //
 
-	void Start () {
+	public override void Start () {
+		base.Start();
+		SetHP(300);
 		state = FOLLOW_ATTACK;
 		
 		// -- follow attack code ------------------------- //
@@ -44,26 +44,21 @@ public class EnemyMovementScript : MonoBehaviour {
 			case STOP_AND_SHOOT_ATTACK: { PerformStopAndShootAttack(); break; }
 		}
 		
-		// changing the attack
-		attackTime += Time.deltaTime;
-		if (state == FOLLOW_ATTACK && attackTime > 8.0f) {
+		// changing the attack pattern if the HP is low
+		if (state == FOLLOW_ATTACK && GetHP() < 150) {
 			shootingDirection = -1;
 			changeAngleTime = 0.0f;
 			SendMessage("SetAutoShootInterval", 0.4f);
 			initialRotation = transform.localRotation;
 			state = STOP_AND_SHOOT_ATTACK;
-		} else if (state == STOP_AND_SHOOT_ATTACK && attackTime > 16.0f) {
-			followAttackSpeed = 0.5f;
-			followAttackTime = 0.0f;
-			SendMessage("SetAutoShootInterval", 0.8f);
-			transform.localRotation = initialRotation;
-			state = FOLLOW_ATTACK;
-			attackTime = 0.0f;
-		}
+		} 
 	}
 	
 	// -- follow attack code ------------------------- //
 	private void PerformFollowAttack() {
+		if (player == null) {
+			return;
+		}
 	
 		// moving
 		Vector3 targetPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);

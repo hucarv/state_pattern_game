@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovementScript : MonoBehaviour {
+public class PlayerMovementScript : SpaceShipScript {
 
 	public float speed = 3.0f;
 
-	void Update () {
+	public override void Start () {
+		base.Start();
+		SetHP(30);
+	}
+
+    void Update () {
 	
 		// calculating the new player position
 		float moveX = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
