@@ -11,7 +11,7 @@
 			In this game you control a spaceship in a war against the alien invasion. You are the only survivor and the earth's only hope! :)
 		</p>
 		<p>
-			The State pattern was applied to allow a better behavior management of the alien spaceship. After receiving a certain amount of demage, the alien spaceship will change its state and then its attack strategy will change.
+			The State pattern was applied to allow a better behavior management of the alien spaceship. After receiving a certain amount of damage, the alien spaceship will change its state and it will start attacking in a more desperate way.
 		</p>
 		<p>
 			This game was made with <a href="http://unity3d.com">Unity3D</a>.</br></br>
